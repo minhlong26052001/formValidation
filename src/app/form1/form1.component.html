@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <h3 class="text-center">Đăng ký khóa học</h3>
+    <form #regForm="ngForm">
+        <div class="mb-3">
+            <label for="name">Tên</label>
+            <input type="text" class="form-control" id="name" placeholder="Nhập tên" name="name" [(ngModel)]="studentModel.name" #name="ngModel">
+            <small class="text-danger" *ngIf="name.invalid && name.touched">Bắt buộc nhập tên / Touched: {{name.touched}} - Untouched: {{name.untouched}}</small>
+        </div>
+        <!-- <div>
+            Touched: {{name.touched}} - Dirty: {{name.dirty}} - Valid: {{name.valid}}
+            <br> Untouched: {{name.untouched}} - Pristine: {{name.pristine}} - Invalid: {{name.invalid}}
+        </div> -->
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" [email]="true" class="form-control" id="email" placeholder="example@email.com" name="email" #email="ngModel" [(ngModel)]="studentModel.email" [class.is-invalid]="email.errors && (email.invalid || email.touched)" required>
+            <!-- <small class="text-danger" *ngIf="email.invalid && email.touched">Email không hợp lệ</small> -->
+            <!-- <small class="text-danger" [class.d-done]="email.invalid || email.touched">Email không hợp lệ</small> -->
+            <div *ngIf="email.errors && (email.invalid || email.touched)">
+                <small class="text-danger" *ngIf="email.errors['email'] ">Email không hợp lệ</small>
+                <small class="text-danger" *ngIf="email.errors['required'] ">Bạn chưa nhập email</small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="studentModel.phone">
+        </div>
+        <div class="mb-3">
+            <label for="course">Chọn khóa học</label>
+            <select id="course" class="form-select" name="course" #course="ngModel" [(ngModel)]="studentModel.course" [class.is-invalid]="errFlag && course.touched" (change)="validateCourse(course.value)" (blur)="validateCourse(course.value)">
+                <option value="none">-Select-</option>
+                <option *ngFor="let c of courses">{{c}}</option>
+             
+            </select>
+            <small class="text-danger" *ngIf="errFlag && course.touched">Vui lòng chọn khóa học</small>
+        </div>
+        <div class="mb-3">
+            <label for="">Chọn ca học</label>
+            <input type="radio" id="rad_sang" class="ms-3" name="cahoc" value="sang" checked [(ngModel)]="studentModel.time">Sáng
+            <input type="radio" id="rad_toi" class="ms-3" name="cahoc" value="toi" [(ngModel)]="studentModel.time">Tối
+        </div>
+        <div class="mb-3">
+            <input type="checkbox" id="agree" name="agree" class="form-check-input" ngModel #agree="ngModel" [class.is-invalid]="agree.value==false && agree.touched">
+            <label class="form-check-label mb-3">Đồng ý với điều khoản</label>
+        </div>
+        <div class="mb-3 text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="regForm.form.invalid || course.value=='none' || agree.value == false">Submit</button>
+        </div>
+    </form>
+    {{regForm.form.invalid}}
+    <br>{{regForm.value | json}}
+    <!-- <br> {{studentModel | json}} -->
+</div>

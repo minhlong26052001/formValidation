@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2>Product List</h2>
+
+<div class="pd_container">
+    <div class="pd_items" *ngFor="let p of productList">
+        <div class="item">
+            <div class="pd_top">
+                <div class="img_top">
+                    <div class="pd_discount">
+                        25%
+                    </div>
+                    <button class="heart">
+                    <i class="fa fa-heart"></i>
+                </button>
+                </div>
+                <div class="pd_pic">
+                    <img src="{{p.image}}" alt="">
+                </div>
+            </div>
+            <div class="pd_infor">
+                <div class="pd_name">{{p.title}}</div>
+                <div class="pd_price"> ${{p.price}}</div>
+                <div class="pd_rating">
+                    <div class="pd_rate"> <i class="fa fa-star"></i> {{p.rating.rate}}
+                    </div>
+                    <div class="pd_ratingCount">Count: {{p.rating.count}}</div>
+                </div>
+            </div>
+            <button class="btn_buy">Buy now</button>
+        </div>
+    </div>
+</div>

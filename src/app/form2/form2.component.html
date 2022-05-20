@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <form [formGroup]="regForm">
+        <h4>Đăng ký</h4>
+        <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" formControlName="username" [class.is-invalid]="username.invalid && username.touched">
+            <small class="text-danger" *ngIf="username.invalid 
+            && username.touched">
+            Username không được để trống</small>
+            <small class="text-danger" *ngIf="username.errors?.['required']">Username tối thiểu phải có 3 ký tự</small>
+            <small class="text-danger" *ngIf="username.errors?.['nameNotMatch']">Username không được chứa ký tự đặc biệt</small>
+
+        </div>
+        <div class="mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email" [class.is-invalid]="regForm.controls['email'].invalid 
+            && regForm.controls['email'].touched">
+            <small class="text-danger" *ngIf="regForm.controls['email'].invalid 
+            && regForm.controls['email'].touched">
+            Email không hợp lệ</small>
+        </div>
+        <div class="mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="pass">
+        </div>
+        <div class="mb-3">
+            <label for="confirmPass">Confirm Password</label>
+            <input type="password" id="confirmPass" class="form-control" formControlName="confirmPass" [class.is-invalid]="regForm.errors?.['misMatch']">
+            <small class="text-danger" *ngIf="regForm.errors?.['misMatch']">Mật khẩu không đúng</small>
+        </div>
+
+        <div class="mb-3 text-center">
+            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-secondary ms-2" (click)="setDefaultValue()">Default value</button>
+        </div>
+    </form>
+
+</div>
